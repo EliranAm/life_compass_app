@@ -10,28 +10,38 @@ class CallForHelpCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Theme.of(context).primaryColor,
-        child: Icon(
-          FlutterIcons.user_md_faw,
-          color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: Material(
+        elevation: 3,
+        borderRadius: BorderRadius.circular(10),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Theme.of(context).primaryColor,
+            child: Icon(
+              FlutterIcons.help_box_mco,
+              color: Colors.white,
+            ),
+          ),
+          title: Row(
+            children: <Widget>[
+              Text(call.callerName),
+              SizedBox(
+                width: 16.0,
+              ),
+              Text(
+                call.time,
+              ),
+            ],
+          ),
+          subtitle: Text(
+            call.message,
+            overflow: TextOverflow.ellipsis,
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+          ),
         ),
-      ),
-      title: Row(
-        children: <Widget>[
-          Text(call.callerName),
-          SizedBox(
-            width: 16.0,
-          ),
-          Text(
-            call.time,
-          ),
-        ],
-      ),
-      subtitle: Text(call.message),
-      trailing: Icon(
-        Icons.arrow_forward_ios,
       ),
     );
   }

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:lifecompassapp/constants.dart';
 
 class RegTextField extends StatelessWidget {
   const RegTextField({
@@ -23,13 +24,13 @@ class RegTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
       child: TextFormField(
         onChanged: onChanged,
-        decoration: InputDecoration(
+        decoration: kTextFieldDecoration.copyWith(
+          labelText: label,
           icon: Icon(icon),
           hintText: hint,
-          labelText: label,
         ),
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,

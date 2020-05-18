@@ -41,6 +41,10 @@ class _RegistrationContactsInfoState extends State<RegistrationContactsInfo> {
   @override
   Widget build(BuildContext context) {
     userData = ModalRoute.of(context).settings.arguments;
+    if (userData == null) {
+      userData = UserData();
+    }
+
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(

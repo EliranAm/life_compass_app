@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -9,43 +10,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginCallHelpScreen extends StatelessWidget {
   static String id = 'login_call_help';
+  final _firestore = Firestore.instance;
 
   Future<void> _callForHelp() async {
     // Get shared preferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    // Get list of contacts
-    List<String> contacts = prefs.getStringList(kContactsSharedPrefKey);
+    String callerName = prefs.getString(kNameSharedPrefKey);
 
     // Compose general message
     String message = await _composeMessage(prefs);
 
-    // TODO: Send notification to helpers
-
+    // Add call to data base
+    _addCallToDatabase(callerName, message);
   }
-
-  /*
-  Future<void> _sendSMS(String message, List<String> recipients) async {
-    List<String> phoneNumbers = [];
-
-    // Collect all phone numbers
-    for (var recipient in recipients) {
-      List<String> info = recipient.split(',');
-      if (info.length == 2) {
-        phoneNumbers.add(info[1]);
-      }
-    }
-
-    // Sens SMS to phone numbers
-    if (phoneNumbers.length > 0) {
-      String _result = await sendSMS(message: message, recipients: phoneNumbers)
-          .catchError((onError) {
-        print(onError);
-      });
-      print(_result);
-    }
-  }
-  */
 
   Future<String> _composeMessage(SharedPreferences prefs) async {
     UserData userData = UserData();
@@ -68,6 +45,63 @@ class LoginCallHelpScreen extends StatelessWidget {
     print(message);
     print(message.length);
     return message;
+  }
+
+  void _addCallToDatabase(String callerName, String message) {
+    _firestore.collection(kMainCollectionName).add({
+      kCallerNameKey: callerName,
+      kTimeStampKey: FieldValue.serverTimestamp(),
+      kMessageKey: message,
+    });
+  }
+
+  Future<bool> _showDialog(context) async {
+    bool isTimeCompleted = true;
+    var isApproved = await showDialog(
+        context: context,
+        builder: (context) {
+          Future.delayed(Duration(seconds: 5), () {
+            if (isTimeCompleted) {
+              Navigator.of(context).pop(true);
+            }
+          });
+          return Directionality(
+            textDirection: TextDirection.rtl,
+            child: AlertDialog(
+              title: FittedBox(
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      'מתחבר לשרתים, אנא המתן...',
+                    ),
+                    SizedBox(height: 20.0,),
+                    CircularProgressIndicator(
+                      backgroundColor: Colors.transparent,
+                      valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+                    ),
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    isTimeCompleted = false;
+                    Navigator.of(context).pop(false);
+                  },
+                  child: Text(
+                    'ביטול',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+
+    return isApproved;
   }
 
   @override
@@ -94,9 +128,13 @@ class LoginCallHelpScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30.0),
                 child: MaterialButton(
                   onPressed: () async {
-                    // TODO: popup box with time to cancel the call for help
-                    _callForHelp();
-                    Navigator.pushNamed(context, AfterCallHelpScreen.id);
+                    bool isApproved = await _showDialog(context);
+                    if (isApproved) {
+                      _callForHelp();
+                      Navigator.pushNamed(context, AfterCallHelpScreen.id);
+                    } else {
+                      print('canceled');
+                    }
                   },
                   minWidth: 250.0,
                   height: 60.0,
@@ -130,3 +168,11 @@ class LoginCallHelpScreen extends StatelessWidget {
     );
   }
 }
+
+/*
+FittedBox(
+  child: FadingText(
+    'מתחבר לשרתים, אנא המתן...',
+  ),
+),
+*/

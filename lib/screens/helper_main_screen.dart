@@ -43,67 +43,61 @@ class _HelperMainScreenState extends State<HelperMainScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                color: kPrimaryColor,
-                child: ListTile(
-                  contentPadding: EdgeInsets.only(left: 20, right: 20, top: 20),
-                  title: Text(
-                    currentUser != null && currentUser.displayName != null
-                        ? currentUser.displayName
-                        : '',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 26,
-                    ),
-                  ),
-                  trailing: CircleAvatar(
-                    foregroundColor: Colors.teal,
-                    backgroundColor: Colors.white,
-                    radius: 26,
-                    child: Icon(
-                      FlutterIcons.user_circle_faw,
-                      size: 40.0,
-                    ),
-                  ),
-                ),
-              ),
-              flex: 1,
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.transparent,
-                child: Container(
-                  child: ListView(
-                    children: <Widget>[
-                      CallForHelpCard(
-                        call: CallForHelpModel(
-                            callerName: 'פלונית אלמונית',
-                            time: '16:10',
-                            message:
-                                'פלוית אלמונית צריכה עזרה, היא נמצאת בכתובת רחוב 10, עיר, ישראל. לפי מיקום GPS נמצאת ברחוב בלה בלה 122, עיר אחרת.'),
-                      ),
-                      CallForHelpCard(
-                        call: CallForHelpModel(
-                            callerName: 'פלונית אלמונית',
-                            time: '16:20',
-                            message:
-                                'פלוית אלמונית צריכה עזרה, היא נמצאת בכתובת רחוב 10, עיר, ישראל. לפי מיקום GPS נמצאת ברחוב בלה בלה 122, עיר אחרת.'),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              flex: 5,
-            ),
-          ],
+        body: SafeArea(
+          child: Stack(
+            children: <Widget>[
+              dashBg,
+              content,
+            ],
+          ),
         ),
       ),
     );
   }
+
+  get dashBg => Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(color: Theme.of(context).primaryColor),
+            flex: 1,
+          ),
+          Expanded(
+            child: Container(color: Colors.transparent),
+            flex: 6,
+          ),
+        ],
+      );
+
+  get content => Container(
+        child: Column(
+          children: <Widget>[
+            header,
+            Expanded(child: MessagesStream()),
+          ],
+        ),
+      );
+
+  get header => ListTile(
+        contentPadding: EdgeInsets.only(left: 20, right: 20, top: 30),
+        title: Text(
+          currentUser != null && currentUser.displayName != null
+              ? currentUser.displayName
+              : '',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 26,
+          ),
+        ),
+        leading: CircleAvatar(
+          foregroundColor: Colors.teal,
+          backgroundColor: Colors.white,
+          radius: 22,
+          child: Icon(
+            FlutterIcons.user_faw,
+            size: 32.0,
+          ),
+        ),
+      );
 }
 
 class MessagesStream extends StatelessWidget {
@@ -111,18 +105,15 @@ class MessagesStream extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
-          .collection('messages')
-          .orderBy('timestamp', descending: false)
+          .collection('helps_calls')
+//          .orderBy('time', descending: false)
           .snapshots(),
       builder: (context, snapshot) {
         // If no data, show loading until new data will arrived
         if (snapshot.hasData == false) {
-          return Expanded(
-            child: Align(
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.lightBlueAccent,
-              ),
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: kPrimaryColor,
             ),
           );
         }
@@ -131,6 +122,7 @@ class MessagesStream extends StatelessWidget {
         final messages = snapshot.data.documents.reversed;
         List<CallForHelpCard> messagesList = [];
         for (DocumentSnapshot msg in messages) {
+          print(msg);
           final callCard = CallForHelpCard(
             call: CallForHelpModel(
               callerName: msg.data['caller'],
@@ -142,9 +134,10 @@ class MessagesStream extends StatelessWidget {
         }
 
         // return widget to display
-        return Expanded(
+        return Container(
+          alignment: Alignment.topCenter,
           child: ListView(
-            reverse: true,
+            //reverse: true,
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
             children: messagesList,
           ),

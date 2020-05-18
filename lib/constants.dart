@@ -2,7 +2,13 @@
 import 'package:flutter/material.dart';
 
 const kMaxDigitsInPhoneNumber = 10;
-const kMinDigitsInPhoneNumber = 9;
+const kTimeToWait = 7;
+
+// database keys
+const kMainCollectionName = 'helps_calls';
+const kCallerNameKey = 'caller';
+const kTimeStampKey = 'time';
+const kMessageKey = 'message';
 
 const kNameSharedPrefKey = 'name';
 const kPhoneSharedPrefKey = 'phone';

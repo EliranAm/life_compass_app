@@ -105,8 +105,8 @@ class MessagesStream extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
-          .collection('helps_calls')
-//          .orderBy('time', descending: false)
+          .collection(kMainCollectionName)
+          .orderBy(kTimeStampKey, descending: false)
           .snapshots(),
       builder: (context, snapshot) {
         // If no data, show loading until new data will arrived
@@ -122,13 +122,16 @@ class MessagesStream extends StatelessWidget {
         final messages = snapshot.data.documents.reversed;
         List<CallForHelpCard> messagesList = [];
         for (DocumentSnapshot msg in messages) {
-          print(msg);
+          final callModel = CallForHelpModel(
+            callerName: msg.data[kCallerNameKey],
+            time: msg.data[kTimeStampKey],
+            message: msg.data[kMessageKey],
+          );
           final callCard = CallForHelpCard(
-            call: CallForHelpModel(
-              callerName: msg.data['caller'],
-              time: msg.data['time'],
-              message: msg.data['message'],
-            ),
+            call: callModel,
+            onTap: () {
+              print('tapped');
+            },
           );
           messagesList.add(callCard);
         }

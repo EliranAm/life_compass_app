@@ -38,7 +38,7 @@ class LoginCallHelpScreen extends StatelessWidget {
 
     // Get user location from GPS
     String address = await LocationHandler.getAddress();
-
+    print(address);
     // Compose message
     String message =
         '''${userData.name} הודיע/ה על מצב מצוקה כעת וזקוק לעזרתך. אנא פנה/י לרשויות לקריאה לעזרה בהקדם. כתובת רשומה: ${userData.address} מיקום נוכחי: $address''';
@@ -60,7 +60,7 @@ class LoginCallHelpScreen extends StatelessWidget {
     var isApproved = await showDialog(
         context: context,
         builder: (context) {
-          Future.delayed(Duration(seconds: 5), () {
+          Future.delayed(Duration(seconds: kTimeToWait), () {
             if (isTimeCompleted) {
               Navigator.of(context).pop(true);
             }
@@ -111,6 +111,15 @@ class LoginCallHelpScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            Flexible(
+              child: Hero(
+                tag: kLogoHeroTag,
+                child: Container(
+                  child: Image.asset(kLogoImage),
+                  height: 200.0,
+                ),
+              ),
+            ),
             Container(
               child: Text(
                 'מצפן',
@@ -168,11 +177,3 @@ class LoginCallHelpScreen extends StatelessWidget {
     );
   }
 }
-
-/*
-FittedBox(
-  child: FadingText(
-    'מתחבר לשרתים, אנא המתן...',
-  ),
-),
-*/

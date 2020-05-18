@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lifecompassapp/components/rounded_button.dart';
+import 'package:lifecompassapp/constants.dart';
 import 'package:lifecompassapp/screens/helper_registration.dart';
 import 'package:lifecompassapp/screens/registartion/registarion_personal_details.dart';
 
@@ -31,6 +32,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Flexible(
+              child: Hero(
+                tag: kLogoHeroTag,
+                child: Container(
+                  child: Image.asset(kLogoImage),
+                  height: 200.0,
+                ),
+              ),
+            ),
+            SizedBox(height: 20.0,),
             Container(
               alignment: Alignment.center,
               child: Text(

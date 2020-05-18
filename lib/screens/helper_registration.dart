@@ -80,17 +80,26 @@ class _HelperRegistrationScreenState extends State<HelperRegistrationScreen> {
               padding: EdgeInsets.symmetric(horizontal: 24.0),
               child: ListView(
                 children: <Widget>[
+                  SizedBox(height: 20.0,),
+                  Hero(
+                    tag: kLogoHeroTag,
+                    child: Container(
+                      child: Image.asset(kLogoImage),
+                      height: MediaQuery.of(context).size.height / 6,
+                    ),
+                  ),
+                  SizedBox(height: 10.0,),
                   Container(
                     alignment: Alignment.center,
                     child: Text(
                       'מצפן',
                       style: TextStyle(
-                        fontSize: 50.0,
+                        fontSize: MediaQuery.of(context).size.height / 16,
                       ),
                     ),
                   ),
                   SizedBox(
-                    height: 48.0,
+                    height: 40.0,
                   ),
                   TextFormField(
                     decoration: kTextFieldDecoration.copyWith(

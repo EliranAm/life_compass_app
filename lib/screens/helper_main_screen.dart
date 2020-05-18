@@ -5,6 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lifecompassapp/components/call_for_help_card.dart';
 import 'package:lifecompassapp/constants.dart';
 import 'package:lifecompassapp/models/call_for_help_model.dart';
+import 'package:lifecompassapp/screens/help_details_screen.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser currentUser;
@@ -58,12 +59,24 @@ class _HelperMainScreenState extends State<HelperMainScreen> {
   get dashBg => Column(
         children: <Widget>[
           Expanded(
-            child: Container(color: Theme.of(context).primaryColor),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black,
+                    blurRadius: 0.5,
+                    spreadRadius: 0.0,
+                    offset: Offset(0.5, 0.5),
+                  ),
+                ],
+              ),
+            ),
             flex: 1,
           ),
           Expanded(
             child: Container(color: Colors.transparent),
-            flex: 6,
+            flex: 7,
           ),
         ],
       );
@@ -72,35 +85,38 @@ class _HelperMainScreenState extends State<HelperMainScreen> {
         child: Column(
           children: <Widget>[
             header,
-            Expanded(child: MessagesStream()),
+            Expanded(
+              child: CallsStream(),
+            ),
           ],
         ),
       );
 
   get header => ListTile(
-        contentPadding: EdgeInsets.only(left: 20, right: 20, top: 30),
+        contentPadding:
+            EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0, bottom: 10.0),
         title: Text(
           currentUser != null && currentUser.displayName != null
               ? currentUser.displayName
               : '',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 26,
+            fontSize: 24.0,
           ),
         ),
         leading: CircleAvatar(
           foregroundColor: Colors.teal,
           backgroundColor: Colors.white,
-          radius: 22,
+          radius: 20.0,
           child: Icon(
             FlutterIcons.user_faw,
-            size: 32.0,
+            size: 30.0,
           ),
         ),
       );
 }
 
-class MessagesStream extends StatelessWidget {
+class CallsStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -130,7 +146,21 @@ class MessagesStream extends StatelessWidget {
           final callCard = CallForHelpCard(
             call: callModel,
             onTap: () {
-              print('tapped');
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom,
+                    ),
+                    child: HelpDetailsScreen(
+                      call: callModel,
+                      callDatabaseUid: msg.documentID,
+                    ),
+                  ),
+                ),
+              );
             },
           );
           messagesList.add(callCard);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifecompassapp/constants.dart';
 
 class AfterCallHelpScreen extends StatelessWidget {
   static String id = 'after_call_help';
@@ -10,6 +11,15 @@ class AfterCallHelpScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            Flexible(
+              child: Hero(
+                tag: kLogoHeroTag,
+                child: Container(
+                  child: Image.asset(kLogoImage),
+                  height: 200.0,
+                ),
+              ),
+            ),
             Container(
               child: Text(
                 'מצפן',

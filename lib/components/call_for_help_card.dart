@@ -1,18 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:lifecompassapp/models/call_for_help_model.dart';
+import 'package:lifecompassapp/services/date_time_handler.dart';
 
 class CallForHelpCard extends StatelessWidget {
   CallForHelpCard({@required this.call, this.onTap});
 
   final CallForHelpModel call;
   final Function onTap;
-
-  String _formatTimestamp(Timestamp timestamp) {
-    DateTime date = timestamp.toDate();
-    return '${date.hour}:${date.minute}';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +27,14 @@ class CallForHelpCard extends StatelessWidget {
           ),
           title: Row(
             children: <Widget>[
-              Expanded(child: Text(call.callerName)),
+              Expanded(
+                child: Text(call.callerName),
+              ),
               SizedBox(
                 width: 16.0,
               ),
               Text(
-                _formatTimestamp(call.time),
+                DateTimeHandler.formatTimestamp(call.time.toDate()),
               ),
             ],
           ),

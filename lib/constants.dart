@@ -1,5 +1,7 @@
-
 import 'package:flutter/material.dart';
+
+const kLogoImage = 'assets/images/logo.png';
+const kLogoHeroTag = 'logo';
 
 const kMaxDigitsInPhoneNumber = 10;
 const kTimeToWait = 7;
@@ -38,5 +40,13 @@ const kTextFieldDecoration = InputDecoration(
   focusedBorder: OutlineInputBorder(
     borderSide: BorderSide(color: kPrimaryColor, width: 2.0),
     borderRadius: BorderRadius.all(Radius.circular(15.0)),
+  ),
+);
+
+const kRoundedTopEdges = BoxDecoration(
+  color: Colors.white,
+  borderRadius: BorderRadius.only(
+    topRight: Radius.circular(20.0),
+    topLeft: Radius.circular(20.0),
   ),
 );

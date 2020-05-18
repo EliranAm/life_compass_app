@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lifecompassapp/components/reg_text_field.dart';
 import 'package:lifecompassapp/components/rounded_button.dart';
 import 'package:lifecompassapp/constants.dart';
 import 'package:lifecompassapp/screens/helper_main_screen.dart';
-import 'package:lifecompassapp/services/fields_validator.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -66,15 +64,21 @@ class _HelperRegistrationScreenState extends State<HelperRegistrationScreen> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            'הרשמה',
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
+        ),
         body: Form(
           key: _formKey,
           child: ModalProgressHUD(
             inAsyncCall: showSpinner,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: ListView(
                 children: <Widget>[
                   Container(
                     alignment: Alignment.center,
@@ -93,9 +97,8 @@ class _HelperRegistrationScreenState extends State<HelperRegistrationScreen> {
                       labelText: 'הכנס/י שם משתמש',
                       hintText: 'שם',
                     ),
-                    validator: (val) => val.length > 0
-                        ? null
-                        : 'אנא הכנס/י שם מלא',
+                    validator: (val) =>
+                        val.length > 0 ? null : 'אנא הכנס/י שם מלא',
                     onChanged: (newValue) {
                       userName = newValue;
                     },

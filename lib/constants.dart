@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 const kLogoImage = 'assets/images/logo.png';
 const kLogoHeroTag = 'logo';
+const kLogoTitle = 'המצפן';
 
 const kMaxDigitsInPhoneNumber = 10;
 const kTimeToWait = 7;
@@ -11,6 +12,8 @@ const kMainCollectionName = 'helps_calls';
 const kCallerNameKey = 'caller';
 const kTimeStampKey = 'time';
 const kMessageKey = 'message';
+const kCallTopicKey = 'topic';
+const kTopicName = 'israel';
 
 const kNameSharedPrefKey = 'name';
 const kPhoneSharedPrefKey = 'phone';
@@ -23,7 +26,7 @@ const kContactsSharedPrefKey = 'contacts';
 const kRegisterSharedPrefKey = 'is_registered';
 const kIsHelperSharedPrefKey = 'is_helper';
 
-const kPrimaryColor = Color(0xff26A69A);
+const kPrimaryColor = Color(0xff26669A);
 const kAccentColor = Color(0xffCC9900);
 
 const kTextFieldDecoration = InputDecoration(

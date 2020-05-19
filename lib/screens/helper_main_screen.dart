@@ -6,6 +6,7 @@ import 'package:lifecompassapp/components/call_for_help_card.dart';
 import 'package:lifecompassapp/constants.dart';
 import 'package:lifecompassapp/models/call_for_help_model.dart';
 import 'package:lifecompassapp/screens/help_details_screen.dart';
+import 'package:lifecompassapp/services/push_nofitications.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser currentUser;
@@ -37,6 +38,7 @@ class _HelperMainScreenState extends State<HelperMainScreen> {
   void initState() {
     super.initState();
     setCurrentUser();
+    PushNotificationsManager().init();
   }
 
   @override
@@ -105,7 +107,7 @@ class _HelperMainScreenState extends State<HelperMainScreen> {
           ),
         ),
         leading: CircleAvatar(
-          foregroundColor: Colors.teal,
+          foregroundColor: kPrimaryColor,
           backgroundColor: Colors.white,
           radius: 20.0,
           child: Icon(
@@ -129,7 +131,8 @@ class CallsStream extends StatelessWidget {
         if (snapshot.hasData == false) {
           return Center(
             child: CircularProgressIndicator(
-              backgroundColor: kPrimaryColor,
+              backgroundColor: Colors.transparent,
+              valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
             ),
           );
         }

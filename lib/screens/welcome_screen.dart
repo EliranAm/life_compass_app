@@ -45,7 +45,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Container(
               alignment: Alignment.center,
               child: Text(
-                'מצפן',
+                kLogoTitle,
                 style: TextStyle(
                   fontSize: 50.0,
                 ),

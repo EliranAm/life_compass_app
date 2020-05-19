@@ -9,7 +9,7 @@ class AfterCallHelpScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Flexible(
               child: Hero(
@@ -20,14 +20,16 @@ class AfterCallHelpScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 20.0,),
             Container(
               child: Text(
-                'מצפן',
+                kLogoTitle,
                 style: TextStyle(
                   fontSize: 50.0,
                 ),
               ),
             ),
+            SizedBox(height: 80.0,),
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.symmetric(vertical: 16.0),

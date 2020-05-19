@@ -19,7 +19,7 @@ class _LandingScreenState extends State<LandingScreen> {
   Widget _content = Scaffold(
     body: Center(
       child: Text(
-        'מצפן',
+        kLogoTitle,
         style: TextStyle(
           fontSize: 50.0,
         ),

@@ -43,7 +43,6 @@ class LoginCallHelpScreen extends StatelessWidget {
     String message =
         '''${userData.name} הודיע/ה על מצב מצוקה כעת וזקוק לעזרתך. אנא פנה/י לרשויות לקריאה לעזרה בהקדם. כתובת רשומה: ${userData.address} מיקום נוכחי: $address''';
     print(message);
-    print(message.length);
     return message;
   }
 
@@ -52,6 +51,7 @@ class LoginCallHelpScreen extends StatelessWidget {
       kCallerNameKey: callerName,
       kTimeStampKey: FieldValue.serverTimestamp(),
       kMessageKey: message,
+      kCallTopicKey: kTopicName,
     });
   }
 
@@ -109,7 +109,7 @@ class LoginCallHelpScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Flexible(
               child: Hero(
@@ -120,14 +120,16 @@ class LoginCallHelpScreen extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 20.0,),
             Container(
               child: Text(
-                'מצפן',
+                kLogoTitle,
                 style: TextStyle(
                   fontSize: 50.0,
                 ),
               ),
             ),
+            SizedBox(height: 80.0,),
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.symmetric(vertical: 16.0),

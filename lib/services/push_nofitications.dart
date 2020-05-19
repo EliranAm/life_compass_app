@@ -39,7 +39,4 @@ class PushNotificationsManager {
       _initialized = true;
     }
   }
-
-  String serverToken =
-      'AAAActridII:APA91bGd0mjRtmFOPJjcGAdwfVlLO7NuBSv8asE2Dh-3bACX1k-tVX24vAuvja_byZYWfDw-u7PNB-F5rGAYpWfBBB6LS7SIK0eeElwgiFNhnSwAMX8Sl5RPck4NbWmuzulBll05Ojeu';
 }

@@ -69,6 +69,7 @@ class _HelperRegistrationScreenState extends State<HelperRegistrationScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: kAccentColor,
           title: Text(
             'הרשמה',
             style: TextStyle(
@@ -106,7 +107,7 @@ class _HelperRegistrationScreenState extends State<HelperRegistrationScreen> {
                     height: 40.0,
                   ),
                   TextFormField(
-                    decoration: kTextFieldDecoration.copyWith(
+                    decoration: kTextFieldAccentDecoration.copyWith(
                       labelText: 'הכנס/י שם משתמש',
                       hintText: 'שם',
                     ),
@@ -124,7 +125,7 @@ class _HelperRegistrationScreenState extends State<HelperRegistrationScreen> {
                     onChanged: (value) {
                       email = value;
                     },
-                    decoration: kTextFieldDecoration.copyWith(
+                    decoration: kTextFieldAccentDecoration.copyWith(
                       hintText: 'הכנס/י מייל',
                     ),
                   ),
@@ -136,7 +137,7 @@ class _HelperRegistrationScreenState extends State<HelperRegistrationScreen> {
                     onChanged: (value) {
                       password = value;
                     },
-                    decoration: kTextFieldDecoration.copyWith(
+                    decoration: kTextFieldAccentDecoration.copyWith(
                       hintText: 'הכנס/י סיסמה',
                     ),
                   ),
@@ -145,7 +146,7 @@ class _HelperRegistrationScreenState extends State<HelperRegistrationScreen> {
                   ),
                   RoundedButton(
                     title: 'הירשם',
-                    color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).accentColor,
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
                         // Show loading spinner

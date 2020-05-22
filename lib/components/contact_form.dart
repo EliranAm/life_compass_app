@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lifecompassapp/models/contact_info.dart';
 import 'package:lifecompassapp/services/fields_validator.dart';
 
@@ -63,7 +64,10 @@ class _ContactFormState extends State<ContactForm> {
                 padding: EdgeInsets.only(left: 16, right: 16, bottom: 24),
                 child: TextFormField(
                   initialValue: widget.contact.phoneNumber,
-                  onSaved: (val) => widget.contact.phoneNumber = val,
+                  keyboardType: TextInputType.phone,
+                  inputFormatters: [
+                    WhitelistingTextInputFormatter.digitsOnly,
+                  ],
                   validator: (val) =>
                   FieldsValidator.isValidPhoneNumber(val) ? null : 'מספר טלפון לא תקין',
                   decoration: InputDecoration(

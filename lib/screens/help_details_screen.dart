@@ -43,7 +43,7 @@ class HelpDetailsScreen extends StatelessWidget {
                   child: Text(
                     'ביטול',
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).accentColor,
                       fontSize: 18.0,
                     ),
                   ),
@@ -55,7 +55,7 @@ class HelpDetailsScreen extends StatelessWidget {
                   child: Text(
                     'אישור',
                     style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).accentColor,
                       fontSize: 18.0,
                     ),
                   ),
@@ -116,7 +116,7 @@ class HelpDetailsScreen extends StatelessWidget {
               ),
               RoundedButton(
                 title: 'הגבתי לקריאה',
-                color: kPrimaryColor,
+                color: kAccentColor,
                 onPressed: () async {
                   bool isApproved = await _showDialog(context);
                   if (isApproved) {

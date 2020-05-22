@@ -19,7 +19,7 @@ class CallForHelpCard extends StatelessWidget {
         child: ListTile(
           onTap: onTap,
           leading: CircleAvatar(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Theme.of(context).accentColor,
             child: Icon(
               FlutterIcons.ios_notifications_ion,
               color: Colors.white,

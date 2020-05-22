@@ -43,15 +43,20 @@ class _HelperMainScreenState extends State<HelperMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: <Widget>[
-              dashBg,
-              content,
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          body: SafeArea(
+            child: Stack(
+              children: <Widget>[
+                dashBg,
+                content,
+              ],
+            ),
           ),
         ),
       ),
@@ -63,7 +68,7 @@ class _HelperMainScreenState extends State<HelperMainScreen> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).accentColor,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black,
@@ -107,7 +112,7 @@ class _HelperMainScreenState extends State<HelperMainScreen> {
           ),
         ),
         leading: CircleAvatar(
-          foregroundColor: kPrimaryColor,
+          foregroundColor: kAccentColor,
           backgroundColor: Colors.white,
           radius: 20.0,
           child: Icon(
@@ -132,7 +137,7 @@ class CallsStream extends StatelessWidget {
           return Center(
             child: CircularProgressIndicator(
               backgroundColor: Colors.transparent,
-              valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+              valueColor: AlwaysStoppedAnimation<Color>(kAccentColor),
             ),
           );
         }
@@ -170,14 +175,31 @@ class CallsStream extends StatelessWidget {
         }
 
         // return widget to display
-        return Container(
-          alignment: Alignment.topCenter,
-          child: ListView(
-            //reverse: true,
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-            children: messagesList,
-          ),
-        );
+        return messagesList.length == 0
+            ? Center(
+                child: Container(
+                  child: Text(
+                    'רשימת קריאות לעזרה'
+                    '\n\n'
+                    'כרגע אין קריאות באזור שלך',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      letterSpacing: 0.5,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ),
+              )
+            : Container(
+                alignment: Alignment.topCenter,
+                child: ListView(
+                  //reverse: true,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                  children: messagesList,
+                ),
+              );
       },
     );
   }

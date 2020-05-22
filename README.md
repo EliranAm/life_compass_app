@@ -1,4 +1,4 @@
-# Life Compassapp
+# Life Compass
 This application developed as part of a Hackathon called “Safe Home”. Its for a memorial of Michal Sella who was brutally murdered by her husband. The main goal of the Hackathon is to develop applications and platforms to help people in danger from the close circle such as husband, parent etc.
 
 This is a “Panic Button” mobile application that disguise its self as a normal compass application, and in the moment of truth, use to call for help.

@@ -17,6 +17,6 @@ The Helpers can answer the call and mark it as handeled so other helpers will kn
 
 ## Getting Started
 
-This project developed with Flutter and using firebase (authentication files need to be add before use).
+This project developed with Flutter and using Firebase (authentication files need to be add before use).
 
 ## Screenshots

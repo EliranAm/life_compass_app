@@ -1,8 +1,7 @@
-# Life Compassapp
+# Life Compass
+This application developed as part of a Hackathon called “Safe Home”. Its for a memorial of Michal Sella who was brutally murdered by her husband. The main goal of the Hackathon is to develop applications and platforms to help people in danger from the close circle such as husband, parent etc.
 
-A compass application (not really).
-This app use to help people in danger from the close circle such as husband, parent etc. 
-The application is a “Panic Button” that disguise its self as a normal compass application, and in the moment of truth, use to call for help.
+This is a “Panic Button” mobile application that disguise its self as a normal compass application, and in the moment of truth, use to call for help.
 
 The users can assign as someone is in danger ("Victems") or as someone how wants to help ("Helpers").
 
@@ -19,4 +18,21 @@ The Helpers can answer the call and mark it as handeled so other helpers will kn
 
 This project developed with Flutter and using Firebase (authentication files need to be add before use).
 
+## Video Presentation
+https://www.youtube.com/watch?v=d0Qs2I3oYMc&t=46s
+
 ## Screenshots
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture1.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture2.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture3.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture4.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture5.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture6.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture7.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture8.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture9.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture10.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture11.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture12.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture13.PNG?raw=true)
+![alt text](https://github.com/EliranAm/life_compass_app/blob/master/screenshots/Capture14.PNG?raw=true)
